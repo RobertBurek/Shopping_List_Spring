@@ -33,7 +33,7 @@ public class DesignShopListController {
     public String showDesignForm(Model model) {
         List<Product> products = Arrays.asList(
                 new Product(1, "Mleko b/l",0, false,Category.NABIAL),
-                new Product(2, "Coca cola",0,false,Category.NAPOJE),
+                new Product(2, "Coca cola",0,true,Category.NAPOJE),
                 new Product(3, "Bułka zwykła",0,false,Category.PIECZYWO),
                 new Product(4, "Masło",0,false,Category.NABIAL),
                 new Product(5, "Śmietana 12%",0,false,Category.NABIAL),
@@ -43,13 +43,15 @@ public class DesignShopListController {
                 new Product(9, "Pomarańcza",0,false,Category.OWOCE),
                 new Product(10,"Marchew",0,false,Category.WARZYWA)
         );
-        Category[] categories = Product.Category.values();
-        for (Category category : categories) {
-            log.info(category.name());
-            model.addAttribute(category.toString().toLowerCase(),
-                    filterByCategory(products, category));
-        }
-        model.addAttribute("design", new ShoppingList());
+//        Category[] categories = Product.Category.values();
+//        for (Category category : categories) {
+//            log.info(category.name());
+//            model.addAttribute(category.toString().toLowerCase(),
+//                    filterByCategory(products, category));
+//        }
+//        model.addAttribute("design", new ShoppingList());
+        model.addAttribute("products", products);
+        log.info(model.toString());
         return "design";
     }
 

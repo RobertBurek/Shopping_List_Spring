@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Shopping List</title>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="cache-control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="cache-control" content="post-check=0, pre-check=0">
+    <meta http-equiv="pragma" content="no-cache">
+
+    <title>Zakupy</title>
+    <link rel="shortcut icon" href="#" />
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allura&display=swap">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pinyon+Script&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allura&display=swap" >
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script th:src="@{/js/startParams.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<header>
+    <div class="up">
+				<span class="group">
+					<button class="btn btn-xs up-left" type="submit" ><i class="fa fa-angle-double-up"></i></button>
+				</span>
+        <span class="group">
+					<button class="btn btn-xs up-right" type="submit" ><i class="fa fa-angle-double-up"></i></button>
+				</span>
+    </div>
+    <div class="down">
+				<span class="group">
+					<button class="btn btn-xs down-left" type="submit" ><i class="fa fa-angle-double-down"></i></button>
+				</span>
+        <span class="group">
+					<button class="btn btn-xs down-right" type="submit" ><i class="fa fa-angle-double-down"></i></button>
+				</span>
+    </div>
+    <h2 class="text-center">Lista towarów, kategoria: Wszystkie</h2>
+    <div class="myNav">
+        <div class="group-section">
+            <section class="family-container">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Kategorie
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- <li><a href="#">Art. mączne</a></li>   -->
+                        <!-- przykładowa linia generowana przez js -->
+                    </ul>
+                    <!-- linia udostępnia możliwość wyświetlania produktów nie przywisanych do żadnej kategorii -->
+                    <!-- <ul><li><a href="#" id="other">Pozostałe</a></li></ul> -->
+                </div>
+            </section>
+            <section class="make-new-product-container">
+                <form>
+                    <!-- <input type="hidden" name="linia0" value="['',5,'btn-success','Napoje']"> -->
+                    <!-- przykładowa linia generowana przez js -->
+                    <span class="group">
+							   <button class="btn btn-warning" type="submit" id="making">Pokaż listę zakupów</button>
+						  	</span>
+                </form>
+            </section>
+
+            <section class="save-new-product-container">
+                <form action="saveApp.php" method="POST" >
+                    <!-- <input type="hidden" name="linia0" value="[' ',5,'btn-success','Napoje']"> -->
+                    <!-- przykładowa linia generowana przez js -->
+                    <span class="group">
+							   <button class="btn btn-danger" type="submit" id="saving">Zapisz zmiany</button>
+						  	</span>
+                </form>
+            </section>
+        </div>
+    </div>
+    <div class="setting">
+        <div class="option-left input-group">
+            <section class="new-product-container" id="addCategory">
+                <form>
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Nazwa kategorii . . .">
+
+                        <span class="input-group-btn">
+									<button class="btn btn-primary" type="submit">Dodaj kategorię</button>
+								</span>
+                    </div>
+                </form>
+                <!-- <span class="group-btn">
+                       <button class="btn btn-danger btn-disabled" type="submit" disabled>Wyczyść listę</button>
+               </span> -->
+            </section>
+            <section class="new-product-container" id="addProduct">
+                <form>
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Nazwa produktu . . .">
+
+                        <span class="input-group-btn">
+									<button class="btn btn-primary" type="submit">Dodaj produkt</button>
+								</span>
+                    </div>
+                </form>
+                <!-- <span class="group-btn">
+                        <button class="btn btn-danger btn-disabled" type="submit" disabled>Usuń wszystko</button>
+                </span> -->
+            </section>
+            <p class="new-product-container">
+                Jeżeli chcesz, aby produkt należał do jakiejś kategorii,
+                to najpierw wybierz z listy daną kategorię, a następnie dodaj produkt.
+            </p>
+        </div>
+        <div class="option-right input-group">
+					<span class="group-btn">
+						<button class="btn btn--swap btn-danger" id="cleanList" type="submit"> Wyczyść listę
+						<span>ZASTANÓW SIĘ</span></button>
+					</span>
+            <span class="group-btn">
+						<button class="btn btn--swap btn-danger" id="cleanAll" type="submit">Usuń wszystko
+						<span>ZASTANÓW SIĘ</span></button>
+					</span>
+        </div>
+    </div>
+</header>
+
+<main class="app-container">
+    <section class="products-container">
+        <ul>
+            <li class="simple-product" th:each="product: ${products}">
+            <div class="input-group">
+            	<span class="input-group-btn">
+					<button
+                            th:class="${product.selected}? 'btn btn-default select-product-btn btn-success' : 'btn btn-default select-product-btn'"
+                            th:value="${product.id}">
+                        <i class="fa fa-check"></i>
+                    </button>
+            	</span>
+               <span class="myInput">
+				<input type="text" class="form-control" th:id="'name'+${product.id}"  th:value="${product.name}"
+                   disabled>
+            	</span>
+               <span class="input-group-btn">
+					<button class="btn btn-danger delete-product-btn" th:value="${product.id}">
+                        <i class="fa fa-times"></i>
+                    </button>
+				</span>
+            </div>
+            <div th:class="'input-group input-group-sm position'+${product.id}">
+            	<span class="input-group-btn">
+					<button class="btn  plus-product-btn" th:value="${product.id}"><i class="fa fa-plus-square"></i></button>
+				</span>
+            	<input type="text" class="form-control" th:idid="'add'+${product.id}" placeholder="0"
+                       th:value="${product.quantity}" disabled>
+            	<span class="input-group-btn">
+					<button class="btn  minus-product-btn" th:value="${product.id}">
+                        <i class="fa fa-minus-square"></i>
+                    </button>
+				</span>
+            </div>
+            </li>
+        </ul>
+    </section>
+</main>
+<!--<table >-->
+<!--<tr-->
+        <!--th:each="product: ${products}">-->
+    <!--<td th:text="${product.id}" />-->
+    <!--<td th:text="${product.name}" />-->
+    <!--<td th:text="${product.quantity}" />-->
+    <!--<td th:text="${product.selected}" />-->
+    <!--<td th:text="${product.category}" />-->
+<!--</tr>-->
+
+<!--<tr-->
+        <!--th:each="product, iStat : ${products}"-->
+        <!--th:style="${iStat.odd}? 'font-weight: bold;color:red;'"-->
+        <!--th:alt-title="${iStat.even}? 'even' : 'odd'">-->
+    <!--<td th:text="${product.id}" />-->
+    <!--<td th:text="${product.name}" />-->
+    <!--<td th:text="${product.quantity}" />-->
+    <!--<td th:text="${product.selected}" />-->
+    <!--<td th:text="${product.category}" />-->
+    <!--<td th:text="${iStat.first}" />-->
+    <!--<td th:text="${iStat.last}" />-->
+    <!--<td th:text="${iStat.size}" />-->
+    <!--<td th:text="${iStat.index}" />-->
+    <!--<td th:text="${iStat.count}" />-->
+<!--</tr>-->
+<!--</table>-->
+
+<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/products.js}"></script>
+<script th:src="@{/js/categories.js}"></script>
+<script th:src="@{/js/new-product.js}"></script>
+<script th:src="@{/js/list-products.js}"></script>
+<script th:src="@{/js/new-product-to-list.js}"></script>
+<script th:src="@{/js/new-categories.js}"></script>
+<script th:src="@{/js/list-categories.js}"></script>
+</body>
+</html>
