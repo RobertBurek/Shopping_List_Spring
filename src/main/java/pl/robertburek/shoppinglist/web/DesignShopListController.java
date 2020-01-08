@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.robertburek.shoppinglist.Product;
 import pl.robertburek.shoppinglist.Product.Category;
+import pl.robertburek.shoppinglist.ShoppingList;
 
 import java.util.Arrays;
 import java.util.List;
