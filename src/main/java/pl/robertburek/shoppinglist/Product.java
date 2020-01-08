@@ -11,12 +11,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Product {
 
-    private final String id;
+    private final int id;
     private final String name;
-    private final String quantity;
-    private final Categorie categorie;
+    private final int quantity;
+    private final boolean selected ;
+    private final Category category;
 
-    public enum Categorie {
+    public enum Category {
         NAPOJE, WARZYWA, OWOCE, NABIAL, PIECZYWO
     }
 }
