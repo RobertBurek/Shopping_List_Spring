@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.robertburek.shoppinglist.InfoProduct;
 import pl.robertburek.shoppinglist.Product;
 import pl.robertburek.shoppinglist.Product.Category;
 import pl.robertburek.shoppinglist.ShoppingList;
@@ -49,10 +51,16 @@ public class DesignShopListController {
 //            model.addAttribute(category.toString().toLowerCase(),
 //                    filterByCategory(products, category));
 //        }
-//        model.addAttribute("design", new ShoppingList());
         model.addAttribute("products", products);
+        model.addAttribute("design", new ShoppingList());
         log.info(model.toString());
         return "design";
+    }
+
+    @PostMapping
+    public String processDesign(ShoppingList design) {
+        log.info("Przetwarzanie projektu : " + design);
+        return "redirect:/design";
     }
 
     private List<Product> filterByCategory(List<Product> products, Category category) {

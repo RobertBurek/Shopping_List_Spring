@@ -81,8 +81,8 @@
                     <!-- <input type="hidden" name="linia0" value="[' ',5,'btn-success','Napoje']"> -->
                     <!-- przykładowa linia generowana przez js -->
                     <span class="group">
-							   <button class="btn btn-danger" type="submit" id="saving">Zapisz zmiany</button>
-						  	</span>
+                        <button class="btn btn-danger" type="submit" id="saving">Zapisz zmiany</button>
+                    </span>
                 </form>
             </section>
         </div>
@@ -136,6 +136,7 @@
 </header>
 
 <main class="app-container">
+    <form method="POST" th:object="${design}">
     <section class="products-container">
         <ul>
             <li class="simple-product" th:each="product: ${products}">
@@ -148,7 +149,8 @@
                     </button>
             	</span>
                <span class="myInput">
-				<input type="text" class="form-control" th:id="'name'+${product.id}"  th:value="${product.name}"
+				<input name="products" type="text" class="form-control" th:id="'name'+${product.id}"
+                       th:value="${product.name}"
                    disabled>
             	</span>
                <span class="input-group-btn">
@@ -159,9 +161,10 @@
             </div>
             <div th:class="'input-group input-group-sm position'+${product.id}">
             	<span class="input-group-btn">
-					<button class="btn  plus-product-btn" th:value="${product.id}"><i class="fa fa-plus-square"></i></button>
+					<button class="btn  plus-product-btn" th:value="${product.id}"><i
+                            class="fa fa-plus-square"></i></button>
 				</span>
-            	<input type="text" class="form-control" th:idid="'add'+${product.id}" placeholder="0"
+            	<input name="products" type="text" class="form-control" th:id="'add'+${product.id}"
                        th:value="${product.quantity}" disabled>
             	<span class="input-group-btn">
 					<button class="btn  minus-product-btn" th:value="${product.id}">
@@ -172,6 +175,16 @@
             </li>
         </ul>
     </section>
+        <h3>Nadaj nazwę :</h3>
+        <input type="text" th:field="*{name}"/>
+        <br/>
+        <h3>Nadaj numer:</h3>
+        <input type="text" th:field="*{id}"/>
+        <br/>
+        <span class="group">
+            <button class="btn btn-danger">Zapisz zmiany</button>
+        </span>
+    </form>
 </main>
 <!--<table >-->
 <!--<tr-->

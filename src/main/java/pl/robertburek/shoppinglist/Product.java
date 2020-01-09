@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @Data
 @RequiredArgsConstructor
-public class Product implements Serializable {
+public class Product {
 
     private final int id;
     private final String name;
