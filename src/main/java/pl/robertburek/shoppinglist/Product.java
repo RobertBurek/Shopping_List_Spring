@@ -10,14 +10,25 @@ import java.io.Serializable;
  */
 
 @Data
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class Product {
 
-    private final int id;
-    private final String name;
-    private final int quantity;
-    private final boolean selected ;
-    private final Category category;
+    private int id;
+    private String name;
+    private int quantity;
+    private boolean selected ;
+    private Category category;
+
+    public Product(int id, String name, int quantity, boolean selected, Category category) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.selected = selected;
+        this.category = category;
+    }
+
+    public Product() {
+    }
 
     public enum Category {
         NAPOJE, WARZYWA, OWOCE, NABIAL, PIECZYWO, PRZEKASKI

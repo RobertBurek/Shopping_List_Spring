@@ -13,7 +13,7 @@
     <meta http-equiv="pragma" content="no-cache">
 
     <title>Zakupy</title>
-    <link rel="shortcut icon" href="#" />
+    <link rel="shortcut icon" href="#"/>
 
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 
@@ -22,9 +22,9 @@
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allura&display=swap">
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pinyon+Script&display=swap" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allura&display=swap" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allura&display=swap">
 
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script th:src="@{/js/startParams.js}"></script>
@@ -36,18 +36,18 @@
 <header>
     <div class="up">
 				<span class="group">
-					<button class="btn btn-xs up-left" type="submit" ><i class="fa fa-angle-double-up"></i></button>
+					<button class="btn btn-xs up-left" type="submit"><i class="fa fa-angle-double-up"></i></button>
 				</span>
         <span class="group">
-					<button class="btn btn-xs up-right" type="submit" ><i class="fa fa-angle-double-up"></i></button>
+					<button class="btn btn-xs up-right" type="submit"><i class="fa fa-angle-double-up"></i></button>
 				</span>
     </div>
     <div class="down">
 				<span class="group">
-					<button class="btn btn-xs down-left" type="submit" ><i class="fa fa-angle-double-down"></i></button>
+					<button class="btn btn-xs down-left" type="submit"><i class="fa fa-angle-double-down"></i></button>
 				</span>
         <span class="group">
-					<button class="btn btn-xs down-right" type="submit" ><i class="fa fa-angle-double-down"></i></button>
+					<button class="btn btn-xs down-right" type="submit"><i class="fa fa-angle-double-down"></i></button>
 				</span>
     </div>
     <h2 class="text-center">Lista towarów, kategoria: Wszystkie</h2>
@@ -77,7 +77,7 @@
             </section>
 
             <section class="save-new-product-container">
-                <form action="saveApp.php" method="POST" >
+                <form action="saveApp.php" method="POST">
                     <!-- <input type="hidden" name="linia0" value="[' ',5,'btn-success','Napoje']"> -->
                     <!-- przykładowa linia generowana przez js -->
                     <span class="group">
@@ -136,80 +136,87 @@
 </header>
 
 <main class="app-container">
-    <form method="POST" th:object="${design}">
+    <!--<form method="POST" th:object="${design}">-->
     <section class="products-container">
         <ul>
-            <li class="simple-product" th:each="product: ${products}">
-            <div class="input-group">
+            <li class="simple-product" th:each="prod: ${products}">
+
+                <div class="input-group">
             	<span class="input-group-btn">
-					<button
-                            th:class="${product.selected}? 'btn btn-default select-product-btn btn-success' : 'btn btn-default select-product-btn'"
-                            th:value="${product.id}">
+                    <!--<input name="id" th:value="${prod.id}" hidden/>-->
+                <form method="post" th:object="${product}">
+					<button name="id" th:value="${prod.id}"
+                            th:class="${prod.selected}? 'btn btn-default select-product-btn btn-success'
+                            : 'btn btn-default select-product-btn'">
                         <i class="fa fa-check"></i>
                     </button>
+                </form>
             	</span>
-               <span class="myInput">
-				<input name="products" type="text" class="form-control" th:id="'name'+${product.id}"
-                       th:value="${product.name}"
-                   disabled>
+
+                        <span class="myInput">
+				<input name="products" type="text" class="form-control" th:id="'name'+${prod.id}"
+                       th:value="${prod.name}"
+                       disabled>
             	</span>
-               <span class="input-group-btn">
-					<button class="btn btn-danger delete-product-btn" th:value="${product.id}">
+                        <span class="input-group-btn">
+					<button class="btn btn-danger delete-product-btn" th:value="${prod.id}">
                         <i class="fa fa-times"></i>
                     </button>
 				</span>
-            </div>
-            <div th:class="'input-group input-group-sm position'+${product.id}">
+                    </div>
+                    <div th:class="'input-group input-group-sm position'+${prod.id}">
             	<span class="input-group-btn">
-					<button class="btn  plus-product-btn" th:value="${product.id}"><i
+					<button class="btn  plus-product-btn" th:value="${prod.id}"><i
                             class="fa fa-plus-square"></i></button>
 				</span>
-            	<input name="products" type="text" class="form-control" th:id="'add'+${product.id}"
-                       th:value="${product.quantity}" disabled>
-            	<span class="input-group-btn">
-					<button class="btn  minus-product-btn" th:value="${product.id}">
+                        <input name="products" type="text" class="form-control" th:id="'add'+${prod.id}"
+                               th:value="${product.quantity}" disabled>
+                        <span class="input-group-btn">
+					<button class="btn  minus-product-btn" th:value="${prod.id}">
                         <i class="fa fa-minus-square"></i>
                     </button>
 				</span>
-            </div>
+                    </div>
+
             </li>
+
         </ul>
     </section>
-        <h3>Nadaj nazwę :</h3>
-        <input type="text" th:field="*{name}"/>
-        <br/>
-        <h3>Nadaj numer:</h3>
-        <input type="text" th:field="*{id}"/>
-        <br/>
-        <span class="group">
-            <button class="btn btn-danger">Zapisz zmiany</button>
-        </span>
-    </form>
+    <!--<h3>Nadaj nazwę :</h3>-->
+    <!--<input type="text" th:field="*{name}"/>-->
+    <!--<br/>-->
+    <!--<h3>Nadaj numer:</h3>-->
+    <!--<input type="text" th:field="*{id}"/>-->
+    <!--<br/>-->
+    <!--<span class="group">-->
+    <!--<button class="btn btn-danger">Zapisz zmiany</button>-->
+    <!--</span>-->
+    <!--</form>-->
 </main>
 <!--<table >-->
 <!--<tr-->
-        <!--th:each="product: ${products}">-->
-    <!--<td th:text="${product.id}" />-->
-    <!--<td th:text="${product.name}" />-->
-    <!--<td th:text="${product.quantity}" />-->
-    <!--<td th:text="${product.selected}" />-->
-    <!--<td th:text="${product.category}" />-->
+<!--th:each="product: ${products}">-->
+<!--<td th:text="${product.id}" />-->
+<!--<td th:text="${product.name}" />-->
+<!--<td th:text="${product.quantity}" />-->
+<!--<td th:text="${product.selected}" />-->
+<!--<td th:text="${product.category}" />-->
 <!--</tr>-->
 
 <!--<tr-->
-        <!--th:each="product, iStat : ${products}"-->
-        <!--th:style="${iStat.odd}? 'font-weight: bold;color:red;'"-->
-        <!--th:alt-title="${iStat.even}? 'even' : 'odd'">-->
-    <!--<td th:text="${product.id}" />-->
-    <!--<td th:text="${product.name}" />-->
-    <!--<td th:text="${product.quantity}" />-->
-    <!--<td th:text="${product.selected}" />-->
-    <!--<td th:text="${product.category}" />-->
-    <!--<td th:text="${iStat.first}" />-->
-    <!--<td th:text="${iStat.last}" />-->
-    <!--<td th:text="${iStat.size}" />-->
-    <!--<td th:text="${iStat.index}" />-->
-    <!--<td th:text="${iStat.count}" />-->
+<!--th:each="product, iStat : ${products}"-->
+<!--th:style="${iStat.odd}? 'font-weight: bold;color:red;'"-->
+<!--th:alt-title="${iStat.even}? 'even' : 'odd'">-->
+<!--<td th:text="${product.id}" />-->
+<!--<td th:text="${product.name}" />-->
+<!--<td th:text="${product.quantity}" />-->
+<!--<td th:text="${product.selected}" />-->
+<!--<td th:text="${product.category}" />-->
+<!--<td th:text="${iStat.first}" />-->
+<!--<td th:text="${iStat.last}" />-->
+<!--<td th:text="${iStat.size}" />-->
+<!--<td th:text="${iStat.index}" />-->
+<!--<td th:text="${iStat.count}" />-->
 <!--</tr>-->
 <!--</table>-->
 
