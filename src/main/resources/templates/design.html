@@ -138,19 +138,19 @@
 <main class="app-container">
     <!--<form method="POST" th:object="${design}">-->
     <section class="products-container">
-        <ul>
+        <ul class="lista">
             <li class="simple-product" th:each="prod: ${products}">
 
                 <div class="input-group">
             	<span class="input-group-btn">
                     <!--<input name="id" th:value="${prod.id}" hidden/>-->
-                <form method="post" th:object="${product}">
+                <!--<form method="post" th:object="${product}">-->
 					<button name="id" th:value="${prod.id}"
                             th:class="${prod.selected}? 'btn btn-default select-product-btn btn-success'
                             : 'btn btn-default select-product-btn'">
                         <i class="fa fa-check"></i>
                     </button>
-                </form>
+                <!--</form>-->
             	</span>
 
                         <span class="myInput">
@@ -220,13 +220,14 @@
 <!--</tr>-->
 <!--</table>-->
 
-<script th:src="@{/js/app.js}"></script>
+<!--<script th:src="@{/js/app.js}"></script>-->
 <script th:src="@{/js/products.js}"></script>
-<script th:src="@{/js/categories.js}"></script>
-<script th:src="@{/js/new-product.js}"></script>
-<script th:src="@{/js/list-products.js}"></script>
-<script th:src="@{/js/new-product-to-list.js}"></script>
-<script th:src="@{/js/new-categories.js}"></script>
-<script th:src="@{/js/list-categories.js}"></script>
+<!--<script th:src="@{/js/categories.js}"></script>-->
+<!--<script th:src="@{/js/new-product.js}"></script>-->
+<!--<script th:src="@{/js/list-products.js}"></script>-->
+<!--<script th:src="@{/js/new-product-to-list.js}"></script>-->
+<!--<script th:src="@{/js/new-categories.js}"></script>-->
+<!--<script th:src="@{/js/list-categories.js}"></script>-->
+<script th:src="@{/js/functions.js}"></script>
 </body>
 </html>

@@ -17,26 +17,28 @@ let cleanList = document.querySelector('#cleanList');
 let cleanAll = document.querySelector('#cleanAll');
 let buttonListhopping = document.querySelector('#making');
 
-console.log("Załadowałem app.js");
-
-let selectProductBtn = document.querySelector('.select-product-btn');
-    selectProductBtn.addEventListener('click', function(){
-        this.classList.toggle('btn-success');
-    });
 
 document.addEventListener('DOMContentLoaded', function() {
+console.log("Załadowałem end.js");
 
-    position = "#add333";
+let buttonSelectAll = document.querySelectorAll(".lista button.btn.btn-default.select-product-btn");
+let buttonPlusAll = document.querySelectorAll(".lista button.btn.plus-product-btn");
+let buttonMinustAll = document.querySelectorAll(".lista button.btn.minus-product-btn");
+let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.delete-product-btn");
+//.querySelectorAll('.select-product-btn button');
+console.log(buttonSelectAll);
+console.log(buttonPlusAll);
+console.log(buttonMinustAll);
+console.log(buttonDeleteAll);
 
-    // runnig nav
     $(document).ready(function() {
         let NavY = $('.myNav').offset().top;
         let stickyNav = function(){
-            let ScrollY = $(window).scrollTop();	  
-            if (ScrollY > NavY) { 
+            let ScrollY = $(window).scrollTop();
+            if (ScrollY > NavY) {
                 $('.myNav').addClass('sticky');
             } else {
-                $('.myNav').removeClass('sticky'); 
+                $('.myNav').removeClass('sticky');
             }
         };
         stickyNav();
@@ -45,37 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Show products
-//    if(shoppingList) {
-//        showListProducts();
-//        textH2="Lista zakupów";
-//            if (categoryName=="Wszystkie"){
-//                textH2="Lista zakupów";
-//                h2.innerHTML = textH2;
-//                document.querySelector('#making').innerHTML="Powrót do tworzenia listy";
-//            } else {
-//                textH2="Lista zakupów, kategria: ";
-//                h2.innerHTML = textH2 + categoryName;
-//            }
-//    } else {
-//        showProducts();
-//    }
-
     if(optionView) {
         settingStyle.style.display="flex";
     } else {
         settingStyle.style.display="none";
     }
-
-    // Show categories
-    showCategories();
-
-    addProductToList();
-    addCategoryToList();
-
-    saveListProducts();
-    makeListProducts();
-
 
     [].forEach.call(swapAll, function(swap) {
         swap.addEventListener('mouseover', () => {
@@ -87,16 +63,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // czyszczenie listy zakupów
-    cleanListProducts();
+//    cleanListProducts();
 
     // czyszczenie wszystkich danych w app
-    cleanAllApp();
+//    cleanAllApp();
 
-    // rozwijany header 
+    // rozwijany header
     upOptionList();
     downOptionList();
 
-    // Listener dla elementu 'pozostałe'
+    // Listener dla elementu 'póozostałe'
     //wyświetla produkty nie przypisane do katedorii
     // document.querySelector("#other").addEventListener("click",function(event){
     //     event.preventDefault();
@@ -111,11 +87,40 @@ document.addEventListener('DOMContentLoaded', function() {
         headerStyle.classList.remove("optionNo");
         settingStyle.style.display = "flex";
     }
+
+    [].forEach.call(buttonSelectAll, function(buttonSelect) {
+            buttonSelect.addEventListener('click', function(event) {
+                console.log(buttonSelect);
+                buttonSelect.classList.toggle('btn-success');
+          })
+    });
+
+    [].forEach.call(buttonPlusAll, function(buttonPlus) {
+            buttonPlus.addEventListener('click', function(event) {
+                console.log(buttonPlus);
+
+          })
+    });
+
+    [].forEach.call(buttonMinustAll, function(buttonMinus) {
+            buttonMinus.addEventListener('click', function(event) {
+                console.log(buttonMinus);
+
+          })
+    });
+
+    [].forEach.call(buttonDeleteAll, function(buttonDelete) {
+            buttonDelete.addEventListener('click', function(event) {
+                console.log(buttonDelete);
+
+          })
+    });
+
 });
 
 function upOptionList(){
     [].forEach.call(upOptionAll, function(upOption) {
-        upOption.addEventListener('click', function(event) { 
+        upOption.addEventListener('click', function(event) {
         divUp.classList.add("hidden");
         divDown.classList.remove("hidden");
         headerStyle.classList.add("optionNo");
@@ -128,7 +133,7 @@ function upOptionList(){
 
 function downOptionList(){
     [].forEach.call(downOptionAll, function(downOption) {
-        downOption.addEventListener('click', function(event) { 
+        downOption.addEventListener('click', function(event) {
         divDown.classList.add("hidden");
         divUp.classList.remove("hidden");
         headerStyle.classList.add("optionYes");
@@ -138,15 +143,4 @@ function downOptionList(){
         optionView = true;
       })
     })
-};
-
-function trim(text){
-    temp = "";
-    while(text.indexOf(" ")==0){
-        for (j=1; j<text.length; j++) temp += text[j];
-        text = temp;
-        temp = "";
-    }
-    text = text.toUpperCase().charAt(0) + text.substr(1, text.length);
-    return text;
 };
