@@ -34,11 +34,11 @@ public class DesignShopListController {
 
     static List<Product> products =new ArrayList<>();
     static {
-        products.add(new Product(1, "Mleko b/l",0, false,Category.NABIAL));
+        products.add(new Product(1, "Mleko b/l",0, false,Category.NABIAŁ));
         products.add( new Product(2, "Coca cola",2,true,Category.NAPOJE));
         products.add( new Product(3, "Bułka zwykła",0,false,Category.PIECZYWO));
-        products.add( new Product(4, "Masło",4,false,Category.NABIAL));
-        products.add( new Product(5, "Śmietana 12%",3,true,Category.NABIAL));
+        products.add( new Product(4, "Masło",4,false,Category.NABIAŁ));
+        products.add( new Product(5, "Śmietana 12%",3,true,Category.NABIAŁ));
         products.add( new Product(6, "Chleb słonacznikowy",0,false,Category.PIECZYWO));
         products.add( new Product(7, "Piwo",0,false,Category.NAPOJE));
         products.add( new Product(8, "Kiwi",0,false,Category.OWOCE));

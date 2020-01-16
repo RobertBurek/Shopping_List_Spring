@@ -165,17 +165,18 @@
 				</span>
                     </div>
                     <div th:class="'input-group input-group-sm position'+${prod.id}">
-            	<span class="input-group-btn">
-					<button class="btn  plus-product-btn" th:value="${prod.id}"><i
-                            class="fa fa-plus-square"></i></button>
-				</span>
+            	        <span class="input-group-btn">
+				        	<button class="btn  plus-product-btn" th:value="${prod.id}">
+                            <i class="fa fa-plus-square"></i>
+                            </button>
+				        </span>
                         <input name="products" type="text" class="form-control" th:id="'add'+${prod.id}"
-                               th:value="${product.quantity}" disabled>
+                               th:value="${prod.quantity}" disabled>
                         <span class="input-group-btn">
-					<button class="btn  minus-product-btn" th:value="${prod.id}">
-                        <i class="fa fa-minus-square"></i>
-                    </button>
-				</span>
+					        <button class="btn  minus-product-btn" th:value="${prod.id}">
+                            <i class="fa fa-minus-square"></i>
+                            </button>
+				        </span>
                     </div>
 
             </li>
@@ -221,7 +222,7 @@
 <!--</table>-->
 
 <!--<script th:src="@{/js/app.js}"></script>-->
-<script th:src="@{/js/products.js}"></script>
+<!--<script th:src="@{/js/products.js}"></script>-->
 <!--<script th:src="@{/js/categories.js}"></script>-->
 <!--<script th:src="@{/js/new-product.js}"></script>-->
 <!--<script th:src="@{/js/list-products.js}"></script>-->
@@ -229,5 +230,6 @@
 <!--<script th:src="@{/js/new-categories.js}"></script>-->
 <!--<script th:src="@{/js/list-categories.js}"></script>-->
 <script th:src="@{/js/functions.js}"></script>
+
 </body>
 </html>
