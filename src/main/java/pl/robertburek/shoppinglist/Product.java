@@ -31,6 +31,6 @@ public class Product {
     }
 
     public enum Category {
-        NAPOJE, WARZYWA, OWOCE, NABIAŁ, PIECZYWO, PRZEKASKI
+        NAPOJE, WARZYWA, OWOCE, NABIAŁ, PIECZYWO, PRZEKĄSKI
     }
 }

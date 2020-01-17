@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.robertburek.shoppinglist.InfoProduct;
 import pl.robertburek.shoppinglist.Product;
 import pl.robertburek.shoppinglist.Product.Category;
 import pl.robertburek.shoppinglist.ShoppingList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +42,9 @@ public class DesignShopListController {
         products.add( new Product(8, "Kiwi",0,false,Category.OWOCE));
         products.add( new Product(9, "Pomarańcza",0,false,Category.OWOCE));
         products.add( new Product(10,"Marchew",0,false,Category.WARZYWA));
+        products.add( new Product(11,"Orzeszki ziemne",0,false,Category.PRZEKĄSKI));
+        products.add( new Product(12,"Chipsy paprykowe",0,false,Category.PRZEKĄSKI));
+        products.add( new Product(13,"Popcorn maślany",0,false,Category.PRZEKĄSKI));
     }
 
     @GetMapping

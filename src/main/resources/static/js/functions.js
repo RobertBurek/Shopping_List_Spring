@@ -19,8 +19,8 @@ let buttonListhopping = document.querySelector('#making');
 //let products=[];
 
 
+
 document.addEventListener('DOMContentLoaded', function() {
-console.log("Załadowałem functions.js");
 
 let buttonSelectAll = document.querySelectorAll(".lista button.btn.btn-default.select-product-btn");
 let buttonPlusAll = document.querySelectorAll(".lista button.btn.plus-product-btn");
@@ -32,21 +32,17 @@ let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.de
 //console.log(buttonMinustAll);
 //console.log(buttonDeleteAll);
 
-    $(document).ready(function() {
-        let NavY = $('.myNav').offset().top;
-        let stickyNav = function(){
-            let ScrollY = $(window).scrollTop();
-            if (ScrollY > NavY) {
-                $('.myNav').addClass('sticky');
-            } else {
-                $('.myNav').removeClass('sticky');
-            }
-        };
-        stickyNav();
-        $(window).scroll(function() {
-            stickyNav();
-        });
-    });
+//    var produkty = [[${products}]];
+//    console.log(produkty);
+
+
+//console.log(products);
+//console.log(products[0]);
+//console.log(products[1].id);
+//console.log(products[1].name);
+//console.log(products[1].category);
+
+
 
     if(optionView) {
         settingStyle.style.display="flex";
@@ -100,10 +96,10 @@ let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.de
     [].forEach.call(buttonSelectAll, function(buttonSelect) {
         buttonSelect.addEventListener('click', function(event) {
             buttonSelect.classList.toggle('btn-success');
-            console.log(buttonSelect);
+//            console.log(buttonSelect);
             var index = buttonSelect.getAttribute('value');
-            listaProd(index,'mod');
-            console.log(products);
+            listaProd(index,'sel');
+//            console.log(products[index-1],index);
         })
      });
 
@@ -114,8 +110,8 @@ let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.de
         var valueThis = document.querySelector('#add' + index);
         var state = parseInt(valueThis.getAttribute('value'));
         if (state < 99) {valueThis.setAttribute('value', state + 1);
-        listaProd(index,'add');
-        console.log(products);
+            listaProd(index,'add');
+//            console.log(products[index-1],index);
         }
         })
     });
@@ -126,9 +122,10 @@ let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.de
             var index = buttonMinus.getAttribute('value');
             var valueThis = document.querySelector('#add' + index);
             var state = parseInt(valueThis.getAttribute('value'));
-            if (state > 0) valueThis.setAttribute('value', state - 1);
-            listaProd(index,'red');
-            console.log(products);
+            if (state > 0) {valueThis.setAttribute('value', state - 1);
+                listaProd(index,'red');
+//                console.log(products[index-1],index);
+            }
         })
     });
 
@@ -137,13 +134,14 @@ let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.de
         buttonDelete.addEventListener('click', function(event) {
             var liToDelete = this.closest('li');
             liToDelete.classList.toggle('hidden');
-            console.log(buttonDelete);
+//            console.log(buttonDelete);
             var index = buttonDelete.getAttribute('value');
             listaProd(index,'del');
-            console.log(products);
+//            console.log(products[index-1],index);
         })
     });
 
+console.log("Załadowałem functions.js");
 });
 
 
@@ -185,7 +183,30 @@ function trim(text){
     return text;
 };
 
-function listaProd(index,option){
+function Product(id,name,quantity,selected,category){
+this.id=id;
+this.name=name;
+this.quantity=quantity;
+this.selected=selected;
+this.category=category;};
 
-products.unshift([index,'Almette Serek',3,'btn-success','NABIAL',option]);
-}
+function listaProd(index,option){
+oldProduct = products[index-1];
+switch (option){
+case "add":
+products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity+1,oldProduct.selected,oldProduct.category);
+break;
+case "red":
+products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity-1,oldProduct.selected,oldProduct.category);
+break;
+case "sel":
+products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity,!oldProduct.selected,oldProduct.category);
+break;
+case "del":
+products.splice([index-1],1);
+break;
+
+};
+//products[index-1]=new Product(index-1,'Almette Serek',3,true,'NABIAL');
+};
+

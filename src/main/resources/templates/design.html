@@ -140,7 +140,20 @@
     <section class="products-container">
         <ul class="lista">
             <li class="simple-product" th:each="prod: ${products}">
+                <!--<script th:inline="javascript">-->
+                <!--&lt;!&ndash;let pozycja=[[${prod.id}]];&ndash;&gt;-->
+<!--&lt;!&ndash;console.log(pozycja);&ndash;&gt;-->
+                <!--products[1][0] = [[${prod.id}]];-->
+                <!--products[1][1] = [[${prod.name}]] ;-->
+                <!--products[1][2] = [[${prod.quantity}]] ;-->
+                <!--products[1][3] = [[${prod.selected}]];-->
+                <!--products[1][4] = [[${prod.category}]] ;-->
+                <!--&lt;!&ndash;console.log(products[$index]);&ndash;&gt;-->
+<!--&lt;!&ndash;products[oneProduct[0]]=oneProduct;&ndash;&gt;-->
 
+<!--console.log(products);-->
+
+<!--</script>-->
                 <div class="input-group">
             	<span class="input-group-btn">
                     <!--<input name="id" th:value="${prod.id}" hidden/>-->
@@ -229,7 +242,32 @@
 <!--<script th:src="@{/js/new-product-to-list.js}"></script>-->
 <!--<script th:src="@{/js/new-categories.js}"></script>-->
 <!--<script th:src="@{/js/list-categories.js}"></script>-->
+<script>
+	$(document).ready(function() {
+	var NavY = $('.nav').offset().top;
+	var stickyNav = function(){
+	var ScrollY = $(window).scrollTop();
+	if (ScrollY > NavY) {
+		$('.nav').addClass('sticky');
+	} else {
+		$('.nav').removeClass('sticky');
+	}
+	};
+	 stickyNav();
+	$(window).scroll(function() {
+		stickyNav();
+	});
+	});
+</script>
 <script th:src="@{/js/functions.js}"></script>
+<script th:inline="javascript">
+
+    var products = [[${products}]];
+    console.log(products);
+
+
+
+</script>
 
 </body>
 </html>
