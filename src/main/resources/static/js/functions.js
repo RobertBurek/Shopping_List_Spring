@@ -16,7 +16,6 @@ let swapAll = document.querySelectorAll('.btn--swap');
 let cleanList = document.querySelector('#cleanList');
 let cleanAll = document.querySelector('#cleanAll');
 let buttonListhopping = document.querySelector('#making');
-//let products=[];
 
 let buttonSelectAll = document.querySelectorAll(".lista button.btn.btn-default.select-product-btn");
 let buttonPlusAll = document.querySelectorAll(".lista button.btn.plus-product-btn");
@@ -75,9 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
         buttonSelect.addEventListener('click', function(event) {
             var index = buttonSelect.getAttribute('value');
             if ((!products[index-1].selected)&&(products[index-1].quantity==0)){
-                listaProd(index,'add');
+                changeProductList(index,'add');
             }
-            listaProd(index,'sel');
+            changeProductList(index,'sel');
         })
      });
 
@@ -87,11 +86,11 @@ document.addEventListener('DOMContentLoaded', function() {
             var index = buttonPlus.getAttribute('value');
             var state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
             if (state == 0){
-                listaProd(index,'sel');
+                changeProductList(index,'sel');
             }
             if (state < 99) {
-                listaProd(index,'add');
-                if (!products[index-1].selected) listaProd(index,'sel');
+                changeProductList(index,'add');
+                if (!products[index-1].selected) changeProductList(index,'sel');
             }
         })
     });
@@ -102,11 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
             var index = buttonMinus.getAttribute('value');
             var state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
             if (state > 0) {
-                listaProd(index,'red');
-            if (!products[index-1].selected) listaProd(index,'sel');
+                changeProductList(index,'red');
+            if (!products[index-1].selected) changeProductList(index,'sel');
             }
             if ((state == 1)&&(products[index-1].selected)){
-                listaProd(index,'sel');
+                changeProductList(index,'sel');
             }
         })
     });
@@ -117,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var liToDelete = this.closest('li');
             liToDelete.classList.toggle('hidden');
             var index = buttonDelete.getAttribute('value');
-            listaProd(index,'del');
+            changeProductList(index,'del');
         })
     });
 
@@ -141,14 +140,14 @@ function upOptionList(){
 function downOptionList(){
     [].forEach.call(downOptionAll, function(downOption) {
         downOption.addEventListener('click', function(event) {
-        divDown.classList.add("hidden");
-        divUp.classList.remove("hidden");
-        headerStyle.classList.add("optionYes");
-        headerStyle.classList.remove("optionNo");
-        settingStyle.style.display = "flex";
-        divUp.style.display = "flex";
-        optionView = true;
-      })
+            divDown.classList.add("hidden");
+            divUp.classList.remove("hidden");
+            headerStyle.classList.add("optionYes");
+            headerStyle.classList.remove("optionNo");
+            settingStyle.style.display = "flex";
+            divUp.style.display = "flex";
+            optionView = true;
+        })
     })
 };
 
@@ -171,7 +170,7 @@ function Product(id,name,quantity,selected,category){
     this.category=category;
 };
 
-function listaProd(index,option){
+function changeProductList(index,option){
     oldProduct = products[index-1];
     switch (option){
         case "add":

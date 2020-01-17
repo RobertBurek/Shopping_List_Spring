@@ -68,7 +68,7 @@
             </section>
             <section class="make-new-product-container">
                 <form method="post" th:object="${products}">
-                    <!--<input name="products" th:field="*{products}">-->
+                    <!--<input name="sho">-->
                                     <!--<h3>Nadaj nazwę :</h3>-->
                                     <!--<input type="text" th:field="*{name}"/>-->
                                     <!--<br/>-->
@@ -78,13 +78,13 @@
                     <!-- <input type="hidden" name="linia0" value="['',5,'btn-success','Napoje']"> -->
                     <!-- przykładowa linia generowana przez js -->
                     <span class="group">
-                        <button class="btn btn-warning" id="making">Pokaż listę zakupów</button>
+                        <button class="btn btn-warning" id="making">Tworzenie listy zakupów</button>
                     </span>
                 </form>
             </section>
 
             <section class="save-new-product-container">
-                <form action="" method="POST">
+                <form action="saveApp.php" method="POST">
                     <!-- <input type="hidden" name="linia0" value="[' ',5,'btn-success','Napoje']"> -->
                     <!-- przykładowa linia generowana przez js -->
                     <span class="group">
