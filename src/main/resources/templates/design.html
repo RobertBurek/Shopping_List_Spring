@@ -183,7 +183,7 @@
                             <i class="fa fa-plus-square"></i>
                             </button>
 				        </span>
-                        <input name="products" type="text" class="form-control" th:id="'add'+${prod.id}"
+                        <input name="products" type="text" class="form-control quantity" th:id="'add'+${prod.id}"
                                th:value="${prod.quantity}" disabled>
                         <span class="input-group-btn">
 					        <button class="btn  minus-product-btn" th:value="${prod.id}">
@@ -264,8 +264,6 @@
 
     var products = [[${products}]];
     console.log(products);
-
-
 
 </script>
 

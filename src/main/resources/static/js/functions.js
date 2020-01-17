@@ -18,30 +18,15 @@ let cleanAll = document.querySelector('#cleanAll');
 let buttonListhopping = document.querySelector('#making');
 //let products=[];
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-
 let buttonSelectAll = document.querySelectorAll(".lista button.btn.btn-default.select-product-btn");
 let buttonPlusAll = document.querySelectorAll(".lista button.btn.plus-product-btn");
 let buttonMinustAll = document.querySelectorAll(".lista button.btn.minus-product-btn");
 let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.delete-product-btn");
-//.querySelectorAll('.select-product-btn button');
-//console.log(buttonSelectAll);
-//console.log(buttonPlusAll);
-//console.log(buttonMinustAll);
-//console.log(buttonDeleteAll);
-
-//    var produkty = [[${products}]];
-//    console.log(produkty);
+let inputQuantityAll = document.querySelectorAll(".lista input.form-control.quantity");
 
 
-//console.log(products);
-//console.log(products[0]);
-//console.log(products[1].id);
-//console.log(products[1].name);
-//console.log(products[1].category);
 
+document.addEventListener('DOMContentLoaded', function() {
 
 
     if(optionView) {
@@ -85,34 +70,29 @@ let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.de
         settingStyle.style.display = "flex";
     }
 
-//    function(buttonSelect) {
-//    console.log("zaznaczamy");
-//        buttonSelect.addEventListener('click', function(event) {
-//             buttonSelect.classList.toggle('btn-success');
-//        })
-//    };
-
 //    obsluga zaznaczania produktu
     [].forEach.call(buttonSelectAll, function(buttonSelect) {
         buttonSelect.addEventListener('click', function(event) {
-            buttonSelect.classList.toggle('btn-success');
-//            console.log(buttonSelect);
             var index = buttonSelect.getAttribute('value');
+            if ((!products[index-1].selected)&&(products[index-1].quantity==0)){
+                listaProd(index,'add');
+            }
             listaProd(index,'sel');
-//            console.log(products[index-1],index);
         })
      });
 
 //    obsługa zwiększania ilości productów
     [].forEach.call(buttonPlusAll, function(buttonPlus) {
         buttonPlus.addEventListener('click', function(event) {
-        var index = buttonPlus.getAttribute('value');
-        var valueThis = document.querySelector('#add' + index);
-        var state = parseInt(valueThis.getAttribute('value'));
-        if (state < 99) {valueThis.setAttribute('value', state + 1);
-            listaProd(index,'add');
-//            console.log(products[index-1],index);
-        }
+            var index = buttonPlus.getAttribute('value');
+            var state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
+            if (state == 0){
+                listaProd(index,'sel');
+            }
+            if (state < 99) {
+                listaProd(index,'add');
+                if (!products[index-1].selected) listaProd(index,'sel');
+            }
         })
     });
 
@@ -120,11 +100,13 @@ let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.de
     [].forEach.call(buttonMinustAll, function(buttonMinus) {
         buttonMinus.addEventListener('click', function(event) {
             var index = buttonMinus.getAttribute('value');
-            var valueThis = document.querySelector('#add' + index);
-            var state = parseInt(valueThis.getAttribute('value'));
-            if (state > 0) {valueThis.setAttribute('value', state - 1);
+            var state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
+            if (state > 0) {
                 listaProd(index,'red');
-//                console.log(products[index-1],index);
+            if (!products[index-1].selected) listaProd(index,'sel');
+            }
+            if ((state == 1)&&(products[index-1].selected)){
+                listaProd(index,'sel');
             }
         })
     });
@@ -134,10 +116,8 @@ let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.de
         buttonDelete.addEventListener('click', function(event) {
             var liToDelete = this.closest('li');
             liToDelete.classList.toggle('hidden');
-//            console.log(buttonDelete);
             var index = buttonDelete.getAttribute('value');
             listaProd(index,'del');
-//            console.log(products[index-1],index);
         })
     });
 
@@ -184,29 +164,31 @@ function trim(text){
 };
 
 function Product(id,name,quantity,selected,category){
-this.id=id;
-this.name=name;
-this.quantity=quantity;
-this.selected=selected;
-this.category=category;};
+    this.id=id;
+    this.name=name;
+    this.quantity=quantity;
+    this.selected=selected;
+    this.category=category;
+};
 
 function listaProd(index,option){
-oldProduct = products[index-1];
-switch (option){
-case "add":
-products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity+1,oldProduct.selected,oldProduct.category);
-break;
-case "red":
-products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity-1,oldProduct.selected,oldProduct.category);
-break;
-case "sel":
-products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity,!oldProduct.selected,oldProduct.category);
-break;
-case "del":
-products.splice([index-1],1,new Product);
-break;
-
-};
-//products[index-1]=new Product(index-1,'Almette Serek',3,true,'NABIAL');
+    oldProduct = products[index-1];
+    switch (option){
+        case "add":
+        products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity+1,oldProduct.selected,oldProduct.category);
+        inputQuantityAll[index-1].setAttribute('value', oldProduct.quantity+1);
+        break;
+        case "red":
+        products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity-1,oldProduct.selected,oldProduct.category);
+        inputQuantityAll[index-1].setAttribute('value', oldProduct.quantity-1);
+        break;
+        case "sel":
+        products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity,!oldProduct.selected,oldProduct.category);
+        buttonSelectAll[index-1].classList.toggle('btn-success');
+        break;
+        case "del":
+        products.splice([index-1],1,new Product);
+        break;
+    };
 };
 

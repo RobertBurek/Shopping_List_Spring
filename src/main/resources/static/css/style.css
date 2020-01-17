@@ -22,6 +22,10 @@ body {
 	align-items: center;
 }
 
+.simple-product{
+    margin-bottom: 10px;
+}
+
 .form-list{
 	/* font-family: 'Sacramento', cursive; */
 	/* font-family: 'Great Vibes', cursive; */
