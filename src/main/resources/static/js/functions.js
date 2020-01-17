@@ -203,7 +203,7 @@ case "sel":
 products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity,!oldProduct.selected,oldProduct.category);
 break;
 case "del":
-products.splice([index-1],1);
+products.splice([index-1],1,new Product);
 break;
 
 };
