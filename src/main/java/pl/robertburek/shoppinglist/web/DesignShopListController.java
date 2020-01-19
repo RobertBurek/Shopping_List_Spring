@@ -4,14 +4,12 @@ package pl.robertburek.shoppinglist.web;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.robertburek.shoppinglist.Product;
 import pl.robertburek.shoppinglist.Product.Category;
 import pl.robertburek.shoppinglist.ShoppingList;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -33,24 +31,10 @@ public class DesignShopListController {
 //            org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 
 
-    static {
-        products.add(new Product(1, "Mleko b/l", 0, false, Category.NABIAŁ));
-        products.add(new Product(2, "Coca cola", 2, true, Category.NAPOJE));
-        products.add(new Product(3, "Bułka zwykła", 0, false, Category.PIECZYWO));
-        products.add(new Product(4, "Masło", 4, false, Category.NABIAŁ));
-        products.add(new Product(5, "Śmietana 12%", 3, true, Category.NABIAŁ));
-        products.add(new Product(6, "Chleb słonacznikowy", 0, false, Category.PIECZYWO));
-        products.add(new Product(7, "Piwo", 0, false, Category.NAPOJE));
-        products.add(new Product(8, "Kiwi", 0, false, Category.OWOCE));
-        products.add(new Product(9, "Pomarańcza", 0, false, Category.OWOCE));
-        products.add(new Product(10, "Marchew", 0, false, Category.WARZYWA));
-        products.add(new Product(11, "Orzeszki ziemne", 0, false, Category.PRZEKĄSKI));
-        products.add(new Product(12, "Chipsy paprykowe", 0, false, Category.PRZEKĄSKI));
-        products.add(new Product(13, "Popcorn maślany", 0, false, Category.PRZEKĄSKI));
-    }
+
 
     @GetMapping
-    public String showDesignForm(Model model) {
+    public String showList(Model model) {
 //        Category[] categories = Product.Category.values();
 //        for (Category category : categories) {
 //            log.info(category.name());
@@ -58,7 +42,9 @@ public class DesignShopListController {
 //                    filterByCategory(products, category));
 //        }
         model.addAttribute("products", products);
-        model.addAttribute("design", new ShoppingList());
+//        ShoppingList shoppingList  = new ShoppingList();
+//        shoppingList.setProducts(products);
+        model.addAttribute("shoppingList", new ShoppingList());
         model.addAttribute("product", new Product());
         log.info(model.toString());
         return "design";
@@ -66,24 +52,47 @@ public class DesignShopListController {
 
 
     @PostMapping
-    public String showList(Model model) {
+    @RequestMapping("/save")
+    public void showList(Product product) {
 //        log.info("Przetwarzanie projektu : " + shoppingList);
-        log.info("Przetwarzanie projektu : " + products);
+        log.info("!!!!TAAAK : " + product);
 //        products = products.stream().filter(new Predicate<Product>() {
 //            @Override
 //            public boolean test(Product product) {
 //                return product.isSelected();
 //            }
 //        }).collect(Collectors.toList());
-        model.addAttribute("products", products.stream().filter(new Predicate<Product>() {
+//        List<Product> newProducts = products.stream().filter(new Predicate<Product>() {
+//            @Override
+//            public boolean test(Product product) {
+//                return product.isSelected();
+//            }
+//        }).collect(Collectors.toList());
+//        model.addAttribute("products", newProducts);
+//        log.info(newProducts.toString());
+//        return "redirect:/shoppingList";
+    }
+
+    @PostMapping
+    public void save() {
+//        log.info("Przetwarzanie projektu : " + shoppingList);
+        log.info("!!!!Przetwarzanie projektu : " + products);
+//        products = products.stream().filter(new Predicate<Product>() {
+//            @Override
+//            public boolean test(Product product) {
+//                return product.isSelected();
+//            }
+//        }).collect(Collectors.toList());
+        List<Product> newProducts = products.stream().filter(new Predicate<Product>() {
             @Override
             public boolean test(Product product) {
                 return product.isSelected();
             }
-        }).collect(Collectors.toList()));
-        return "redirect:/shoppingList";
+        }).collect(Collectors.toList());
+//        model.addAttribute("products", newProducts);
+        log.info(newProducts.toString());
+//        return "redirect:/shoppingList";
     }
-
 
     private List<Product> filterByCategory(List<Product> products, Category category) {
         return products

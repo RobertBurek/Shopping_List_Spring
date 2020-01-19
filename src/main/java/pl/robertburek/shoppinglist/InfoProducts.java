@@ -7,9 +7,8 @@ import java.util.List;
 /**
  * Created by Robert Burek
  */
+
 @Data
-public class InfoProduct {
-    private int idProduct;
-    private String nameProduct;
+public class InfoProducts {
     private List<String> paramsProduct;
 }

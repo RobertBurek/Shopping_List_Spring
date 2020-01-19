@@ -1,9 +1,7 @@
 package pl.robertburek.shoppinglist;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
-import java.io.Serializable;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Robert Burek
@@ -11,12 +9,13 @@ import java.io.Serializable;
 
 @Data
 //@RequiredArgsConstructor
+//@Component
 public class Product {
 
     private int id;
     private String name;
     private int quantity;
-    private boolean selected ;
+    private boolean selected;
     private Category category;
 
     public Product(int id, String name, int quantity, boolean selected, Category category) {

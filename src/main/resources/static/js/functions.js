@@ -27,7 +27,6 @@ let inputQuantityAll = document.querySelectorAll(".lista input.form-control.quan
 
 document.addEventListener('DOMContentLoaded', function() {
 
-
     if(optionView) {
         settingStyle.style.display="flex";
     } else {
@@ -72,34 +71,36 @@ document.addEventListener('DOMContentLoaded', function() {
 //    obsluga zaznaczania produktu
     [].forEach.call(buttonSelectAll, function(buttonSelect) {
         buttonSelect.addEventListener('click', function(event) {
-            var index = buttonSelect.getAttribute('value');
+            let index = buttonSelect.getAttribute('value');
             if ((!products[index-1].selected)&&(products[index-1].quantity==0)){
                 changeProductList(index,'add');
             }
             changeProductList(index,'sel');
-        })
+        sendProduct("/shoppingList", index);
+     })
      });
 
 //    obsługa zwiększania ilości productów
     [].forEach.call(buttonPlusAll, function(buttonPlus) {
         buttonPlus.addEventListener('click', function(event) {
-            var index = buttonPlus.getAttribute('value');
-            var state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
-            if (state == 0){
-                changeProductList(index,'sel');
-            }
-            if (state < 99) {
-                changeProductList(index,'add');
-                if (!products[index-1].selected) changeProductList(index,'sel');
-            }
+        let index = buttonPlus.getAttribute('value');
+        let state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
+        if (state == 0){
+            changeProductList(index,'sel');
+        }
+        if (state < 99) {
+            changeProductList(index,'add');
+            if (!products[index-1].selected) changeProductList(index,'sel');
+        }
+        sendProduct("/shoppingList", index);
         })
     });
 
 //    obsługa zmniejszania ilości productów
     [].forEach.call(buttonMinustAll, function(buttonMinus) {
         buttonMinus.addEventListener('click', function(event) {
-            var index = buttonMinus.getAttribute('value');
-            var state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
+            let index = buttonMinus.getAttribute('value');
+            let state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
             if (state > 0) {
                 changeProductList(index,'red');
             if (!products[index-1].selected) changeProductList(index,'sel');
@@ -107,16 +108,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if ((state == 1)&&(products[index-1].selected)){
                 changeProductList(index,'sel');
             }
+            sendProduct("/shoppingList", index);
         })
     });
 
 //    obsługa usuwania produktu
     [].forEach.call(buttonDeleteAll, function(buttonDelete) {
         buttonDelete.addEventListener('click', function(event) {
-            var liToDelete = this.closest('li');
+            let liToDelete = this.closest('li');
             liToDelete.classList.toggle('hidden');
-            var index = buttonDelete.getAttribute('value');
+            let index = buttonDelete.getAttribute('value');
             changeProductList(index,'del');
+            sendProduct("/shoppingList", index);
         })
     });
 
@@ -162,6 +165,19 @@ function trim(text){
     return text;
 };
 
+function sendProduct(url, index){
+            fetch(url, {
+                    method: "post",
+                     headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                      },
+                    body: JSON.stringify(products[index-1])
+                }).then(res => {
+                          console.log(products[index-1]);
+                        })
+};
+
 function Product(id,name,quantity,selected,category){
     this.id=id;
     this.name=name;
@@ -186,7 +202,8 @@ function changeProductList(index,option){
         buttonSelectAll[index-1].classList.toggle('btn-success');
         break;
         case "del":
-        products.splice([index-1],1,new Product);
+        deleteProduct=new Product(index,null,null,null,null);
+        products.splice([index-1],1,deleteProduct);
         break;
     };
 };

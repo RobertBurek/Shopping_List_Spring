@@ -11,7 +11,8 @@ import java.util.List;
 @Data
 public class ShoppingList {
 
-    private int id;
+//    private int id;
     private String name;
-    private List<String> products;
+    private List<String> changes;
+
 }
