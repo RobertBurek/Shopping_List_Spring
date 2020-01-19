@@ -12,6 +12,7 @@ import pl.robertburek.shoppinglist.Product.Category;
 import pl.robertburek.shoppinglist.ShoppingList;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static pl.robertburek.shoppinglist.ShoppingListApplication.products;
@@ -39,6 +40,12 @@ public class DesignShopListController {
 //            model.addAttribute(category.toString().toLowerCase(),
 //                    filterByCategory(products, category));
 //        }
+        products = products.stream().filter(new Predicate<Product>() {
+            @Override
+            public boolean test(Product product) {
+                return product.getName()!=null;
+            }
+        }).collect(Collectors.toList());
         model.addAttribute("products", products);
         model.addAttribute("shoppingList", new ShoppingList());
         model.addAttribute("product", new Product());

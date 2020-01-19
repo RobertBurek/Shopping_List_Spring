@@ -146,48 +146,42 @@
     <!--<form method="POST" th:object="${design}">-->
     <section class="products-container">
         <ul class="lista">
-            <li class="simple-product" th:each="prod: ${products}">
-
+            <li th:each="prod: ${products}"
+                class="simple-product">
+                <!--th:class="${prod.name==null}? 'simple-product hidden' : 'simple-product'">-->
                 <div class="input-group">
             	<span class="input-group-btn">
-                    <!--<input name="id" th:value="${prod.id}" hidden/>-->
-                <!--<form method="post" th:object="${product}">-->
-					<button name="id" th:value="${prod.id}"
+					<button th:value="${prod.id}" th:id="'btnSelect'+${prod.id}"
                             th:class="${prod.selected}? 'btn btn-default select-product-btn btn-success'
                             : 'btn btn-default select-product-btn'">
                         <i class="fa fa-check"></i>
                     </button>
-                <!--</form>-->
             	</span>
-
-                        <span class="myInput">
-				<input name="products" type="text" class="form-control" th:id="'name'+${prod.id}"
-                       th:value="${prod.name}"
-                       disabled>
-            	</span>
-                        <span class="input-group-btn">
+                    <span class="myInput">
+				        <input type="text" class="form-control" th:id="'name'+${prod.id}"
+                               th:value="${prod.name}" disabled>
+                </span>
+                    <span class="input-group-btn">
 					<button class="btn btn-danger delete-product-btn" th:value="${prod.id}">
                         <i class="fa fa-times"></i>
                     </button>
 				</span>
-                    </div>
-                    <div th:class="'input-group input-group-sm position'+${prod.id}">
-            	        <span class="input-group-btn">
-				        	<button class="btn  plus-product-btn" th:value="${prod.id}">
+                </div>
+                <div th:class="'input-group input-group-sm position'+${prod.id}">
+                    <span class="input-group-btn">
+                        <button class="btn  plus-product-btn" th:value="${prod.id}" th:id="'btnPlus'+${prod.id}">
                             <i class="fa fa-plus-square"></i>
-                            </button>
-				        </span>
-                        <input name="products" type="text" class="form-control quantity" th:id="'add'+${prod.id}"
-                               th:value="${prod.quantity}" disabled>
-                        <span class="input-group-btn">
-					        <button class="btn  minus-product-btn" th:value="${prod.id}">
+                        </button>
+                    </span>
+                    <input name="products" type="text" class="form-control quantity" th:id="'inputAmount'+${prod.id}"
+                           th:value="${prod.quantity}" disabled>
+                    <span class="input-group-btn">
+                        <button class="btn  minus-product-btn" th:value="${prod.id}" th:id="'btnMinus'+${prod.id}">
                             <i class="fa fa-minus-square"></i>
-                            </button>
-				        </span>
-                    </div>
-
+                        </button>
+                    </span>
+                </div>
             </li>
-
         </ul>
     </section>
     <!--<h3>Nadaj nazwę :</h3>-->

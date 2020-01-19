@@ -30,6 +30,7 @@ public class ShopListController {
 
     @GetMapping
     public String showSelectedProducts(Model model) {
+        products = products.stream().filter(product -> product.getName() != null).collect(Collectors.toList());
         List<Product> listSelectedProducts = products.stream().filter(new Predicate<Product>() {
             @Override
             public boolean test(Product product) {
@@ -37,7 +38,7 @@ public class ShopListController {
             }
         }).collect(Collectors.toList());
         model.addAttribute("products", listSelectedProducts);
-        log.info("Wybrani : ", listSelectedProducts);
+        log.info("Wybrani : " + listSelectedProducts);
         return "shoppingList";
     }
 
@@ -51,8 +52,13 @@ public class ShopListController {
 
     @PutMapping
     public void modificationList(@RequestBody Product product) {
+        int index=0;
         log.info("Wysłałem : " + product);
-        products.set(product.getId() - 1, product);
+        for (Product el :products) {
+            if (el.getId()==product.getId()) break;
+            else index++;
+        }
+        products.set(index, product);
     }
 
 

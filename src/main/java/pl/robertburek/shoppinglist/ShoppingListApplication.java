@@ -16,17 +16,19 @@ public class ShoppingListApplication {
     static {
         products.add(new Product(1, "Mleko b/l", 0, false, Product.Category.NABIAŁ));
         products.add(new Product(2, "Coca cola", 2, true, Product.Category.NAPOJE));
-        products.add(new Product(3, "Bułka zwykła", 0, false, Product.Category.PIECZYWO));
+        products.add(new Product(3, null, 0, false, null));
         products.add(new Product(4, "Masło", 4, false, Product.Category.NABIAŁ));
         products.add(new Product(5, "Śmietana 12%", 3, true, Product.Category.NABIAŁ));
         products.add(new Product(6, "Chleb słonacznikowy", 0, false, Product.Category.PIECZYWO));
         products.add(new Product(7, "Piwo", 0, false, Product.Category.NAPOJE));
         products.add(new Product(8, "Kiwi", 0, false, Product.Category.OWOCE));
         products.add(new Product(9, "Pomarańcza", 0, false, Product.Category.OWOCE));
-        products.add(new Product(10, "Marchew", 0, false, Product.Category.WARZYWA));
+        products.add(new Product(10, null, 0, false, null));
         products.add(new Product(11, "Orzeszki ziemne", 0, false, Product.Category.PRZEKĄSKI));
         products.add(new Product(12, "Chipsy paprykowe", 0, false, Product.Category.PRZEKĄSKI));
-        products.add(new Product(13, "Popcorn maślany", 0, false, Product.Category.PRZEKĄSKI));
+        products.add(new Product(13, null, 0, false, null));
+        products.add(new Product(14, "Popcorn maślany", 0, false, Product.Category.PRZEKĄSKI));
+        products.add(new Product(15, "Marchew", 0, false, Product.Category.WARZYWA));
     }
 
 

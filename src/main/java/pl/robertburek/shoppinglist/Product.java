@@ -1,7 +1,6 @@
 package pl.robertburek.shoppinglist;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by Robert Burek
@@ -32,4 +31,5 @@ public class Product {
     public enum Category {
         NAPOJE, WARZYWA, OWOCE, NABIAŁ, PIECZYWO, PRZEKĄSKI
     }
+
 }

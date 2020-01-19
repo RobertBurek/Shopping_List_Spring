@@ -23,7 +23,19 @@ let buttonMinustAll = document.querySelectorAll(".lista button.btn.minus-product
 let buttonDeleteAll = document.querySelectorAll(".lista button.btn.btn-danger.delete-product-btn");
 let inputQuantityAll = document.querySelectorAll(".lista input.form-control.quantity");
 
+//let numberForList;
 
+function toIndex(index){
+    let i=0;
+    for(i;i<products.length;i++){
+        if(products[i].id==index) {
+//        oldProduct = products[i];
+//        numberForList=i;
+        break;
+        };
+    };
+    return i;
+};
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -31,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         settingStyle.style.display="flex";
     } else {
         settingStyle.style.display="none";
-    }
+    };
 
     [].forEach.call(swapAll, function(swap) {
         swap.addEventListener('mouseover', () => {
@@ -71,8 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
 //    obsluga zaznaczania produktu
     [].forEach.call(buttonSelectAll, function(buttonSelect) {
         buttonSelect.addEventListener('click', function(event) {
-            let index = buttonSelect.getAttribute('value');
-            if ((!products[index-1].selected)&&(products[index-1].quantity==0)){
+            let index = toIndex(buttonSelect.getAttribute('value'));
+            if ((!products[index].selected)&&(products[index].quantity==0)){
                 changeProductList(index,'add');
             }
             changeProductList(index,'sel');
@@ -83,14 +95,14 @@ document.addEventListener('DOMContentLoaded', function() {
 //    obsługa zwiększania ilości productów
     [].forEach.call(buttonPlusAll, function(buttonPlus) {
         buttonPlus.addEventListener('click', function(event) {
-        let index = buttonPlus.getAttribute('value');
-        let state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
-        if (state == 0){
+        let index = toIndex(buttonPlus.getAttribute('value'));
+//        let state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
+        if (products[index].quantity == 0){
             changeProductList(index,'sel');
         }
-        if (state < 99) {
+        if (products[index].quantity < 99) {
             changeProductList(index,'add');
-            if (!products[index-1].selected) changeProductList(index,'sel');
+            if (!products[index].selected) changeProductList(index,'sel');
         }
         sendProduct(index);
         })
@@ -99,13 +111,13 @@ document.addEventListener('DOMContentLoaded', function() {
 //    obsługa zmniejszania ilości productów
     [].forEach.call(buttonMinustAll, function(buttonMinus) {
         buttonMinus.addEventListener('click', function(event) {
-            let index = buttonMinus.getAttribute('value');
-            let state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
-            if (state > 0) {
+            let index = toIndex(buttonMinus.getAttribute('value'));
+//            let state = parseInt(inputQuantityAll[index-1].getAttribute('value'));
+            if (products[index].quantity > 0) {
                 changeProductList(index,'red');
-            if (!products[index-1].selected) changeProductList(index,'sel');
+            if (!products[index].selected) changeProductList(index,'sel');
             }
-            if ((state == 1)&&(products[index-1].selected)){
+            if ((products[index].quantity == 0)&&(products[index].selected)){
                 changeProductList(index,'sel');
             }
             sendProduct(index);
@@ -117,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         buttonDelete.addEventListener('click', function(event) {
             let liToDelete = this.closest('li');
             liToDelete.classList.toggle('hidden');
-            let index = buttonDelete.getAttribute('value');
+            let index = toIndex(buttonDelete.getAttribute('value'));
             changeProductList(index,'del');
             sendProduct(index);
         })
@@ -172,9 +184,9 @@ function sendProduct(index){
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                       },
-                    body: JSON.stringify(products[index-1])
+                    body: JSON.stringify(products[index])
                 }).then(res => {
-                          console.log(products[index-1]);
+                          console.log(products[index]);
                         })
 };
 
@@ -186,24 +198,37 @@ function Product(id,name,quantity,selected,category){
     this.category=category;
 };
 
-function changeProductList(index,option){
-    oldProduct = products[index-1];
+function changeProductList(index, option){
+let oldProduct = products[index];
+//for(let i=0;i<products.length;i++){
+//if(products[i].id==index) {
+//oldProduct = products[i];
+//numberForList=i;
+//break;
+//}
+//};
+//console.log(numberForList+"/"+index);
+console.log(oldProduct);
+//     products[index-1];
+        let inputSelected = document.querySelector('#inputAmount'+oldProduct.id);
+        console.log(inputSelected);
     switch (option){
         case "add":
-        products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity+1,oldProduct.selected,oldProduct.category);
-        inputQuantityAll[index-1].setAttribute('value', oldProduct.quantity+1);
+        products[index]=new Product(oldProduct.id,oldProduct.name,oldProduct.quantity+1,oldProduct.selected,oldProduct.category);
+        inputSelected.setAttribute('value', oldProduct.quantity + 1);
         break;
         case "red":
-        products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity-1,oldProduct.selected,oldProduct.category);
-        inputQuantityAll[index-1].setAttribute('value', oldProduct.quantity-1);
+        products[index]=new Product(oldProduct.id,oldProduct.name,oldProduct.quantity-1,oldProduct.selected,oldProduct.category);
+        inputSelected.setAttribute('value', oldProduct.quantity - 1);
         break;
         case "sel":
-        products[index-1]=new Product(index,oldProduct.name,oldProduct.quantity,!oldProduct.selected,oldProduct.category);
-        buttonSelectAll[index-1].classList.toggle('btn-success');
+        products[index]=new Product(oldProduct.id,oldProduct.name,oldProduct.quantity,!oldProduct.selected,oldProduct.category);
+        let buttonSelected = document.querySelector('#btnSelect'+oldProduct.id);
+        buttonSelected.classList.toggle('btn-success');
         break;
         case "del":
-        deleteProduct=new Product(index,null,null,null,null);
-        products.splice([index-1],1,deleteProduct);
+        deleteProduct=new Product(oldProduct.id,null,null,null,null);
+        products.splice(index,1,deleteProduct);
         break;
     };
 };
