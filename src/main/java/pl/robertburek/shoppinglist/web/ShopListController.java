@@ -36,57 +36,40 @@ public class ShopListController {
 //            org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 
 
-//    @GetMapping
-//    public String showListForm(Model model) {
-////        Category[] categories = Product.Category.values();
-////        for (Category category : categories) {
-////            log.info(category.name());
-////            model.addAttribute(category.toString().toLowerCase(),
-////                    filterByCategory(products, category));
-////        }
-//        model.addAttribute("products", products.stream().filter(new Predicate<Product>() {
-//            @Override
-//            public boolean test(Product product) {
-//                return product.isSelected();
-//            }
-//        }).collect(Collectors.toList()));
-////        model.addAttribute("design", new ShoppingList());
-////        model.addAttribute("product", new Product());
-//        log.info(model.toString());
-//        return "shoppingList";
-//    }
-
-
-//    @PostMapping
-//    public String showList(Model model) {
-////        log.info("Przetwarzanie projektu : " + shoppingList);
-//        log.info("Przetwarzanie projektu : " + products);
-//        products = products.stream().filter(new Predicate<Product>() {
-//            @Override
-//            public boolean test(Product product) {
-//                return product.isSelected();
-//            }
-//        }).collect(Collectors.toList());
-//        log.info("Po sortowaniu : " + products);
-//        model.addAttribute("products", products);
-//        return "shoppingList";
-////        return "redirect:/design";
-//    }
+    @GetMapping
+    public String showSelectedProducts(Model model) {
+//        log.info("Przetwarzanie projektu : " + shoppingList);
+//        log.info("!!!!TAAAK : " + product);
+        List<Product> listSelectedProducts = products.stream().filter(new Predicate<Product>() {
+            @Override
+            public boolean test(Product product) {
+                return product.isSelected();
+            }
+        }).collect(Collectors.toList());
+        model.addAttribute("products", listSelectedProducts);
+        log.info("Wybrani : ",listSelectedProducts);
+        return "shoppingList";
+    }
 
 
     @PostMapping
-    public void save(@RequestBody Product product){
-//    public void save(@RequestBody String jsonString){
-//            (HttpServletRequest request,
-//             @RequestBody Product product, BindingResult result, HttpServletResponse response) {
-//                response.setHeader("Location", ServletUriComponentsBuilder.fromCurrentContextPath()
-//                        .path("/shoppingList/" + product.getId()).toUriString());
+    public String showList(Model model) {
+//        log.info("Przetwarzanie projektu : " + shoppingList);
+        log.info("Przetwarzanie projektu : " + products);
 
-//        log.info("Request : " + request);
-//        log.info("Response : " + response);
-//        log.info("Resualt : " + result);
-        log.info("!!!Product : " + product);
+        model.addAttribute("products", products);
+        return "redirect:/design";
     }
+
+    @PutMapping
+    public void modificationList(@RequestBody Product product) {
+//        log.info("Przetwarzanie projektu : " + shoppingList);
+        log.info("Wysłałem : " + product);
+        products.set(product.getId(),product);
+        log.info("zmianiłem w bazie");
+    }
+
+
 
 
 }

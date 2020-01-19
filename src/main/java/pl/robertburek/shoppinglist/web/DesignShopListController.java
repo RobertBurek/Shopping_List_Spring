@@ -34,7 +34,7 @@ public class DesignShopListController {
 
 
     @GetMapping
-    public String showList(Model model) {
+    public String showProducts(Model model) {
 //        Category[] categories = Product.Category.values();
 //        for (Category category : categories) {
 //            log.info(category.name());
@@ -52,47 +52,40 @@ public class DesignShopListController {
 
 
     @PostMapping
-    @RequestMapping("/save")
-    public void showList(Product product) {
+    public String showSelectedProducts() {
 //        log.info("Przetwarzanie projektu : " + shoppingList);
-        log.info("!!!!TAAAK : " + product);
-//        products = products.stream().filter(new Predicate<Product>() {
+//        log.info("!!!!TAAAK : " + product);
+//        List<Product> listSelectedProducts = products.stream().filter(new Predicate<Product>() {
 //            @Override
 //            public boolean test(Product product) {
 //                return product.isSelected();
 //            }
 //        }).collect(Collectors.toList());
+//        model.addAttribute("products", listSelectedProducts);
+//        log.info("Wybrani : ",listSelectedProducts);
+        return "redirect:/shoppingList";
+    }
+
+//    @PostMapping
+//    public void save() {
+////        log.info("Przetwarzanie projektu : " + shoppingList);
+//        log.info("!!!!Przetwarzanie projektu : " + products);
+////        products = products.stream().filter(new Predicate<Product>() {
+////            @Override
+////            public boolean test(Product product) {
+////                return product.isSelected();
+////            }
+////        }).collect(Collectors.toList());
 //        List<Product> newProducts = products.stream().filter(new Predicate<Product>() {
 //            @Override
 //            public boolean test(Product product) {
 //                return product.isSelected();
 //            }
 //        }).collect(Collectors.toList());
-//        model.addAttribute("products", newProducts);
+////        model.addAttribute("products", newProducts);
 //        log.info(newProducts.toString());
-//        return "redirect:/shoppingList";
-    }
-
-    @PostMapping
-    public void save() {
-//        log.info("Przetwarzanie projektu : " + shoppingList);
-        log.info("!!!!Przetwarzanie projektu : " + products);
-//        products = products.stream().filter(new Predicate<Product>() {
-//            @Override
-//            public boolean test(Product product) {
-//                return product.isSelected();
-//            }
-//        }).collect(Collectors.toList());
-        List<Product> newProducts = products.stream().filter(new Predicate<Product>() {
-            @Override
-            public boolean test(Product product) {
-                return product.isSelected();
-            }
-        }).collect(Collectors.toList());
-//        model.addAttribute("products", newProducts);
-        log.info(newProducts.toString());
-//        return "redirect:/shoppingList";
-    }
+////        return "redirect:/shoppingList";
+//    }
 
     private List<Product> filterByCategory(List<Product> products, Category category) {
         return products

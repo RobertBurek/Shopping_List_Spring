@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 changeProductList(index,'add');
             }
             changeProductList(index,'sel');
-        sendProduct("/shoppingList", index);
+        sendProduct(index);
      })
      });
 
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             changeProductList(index,'add');
             if (!products[index-1].selected) changeProductList(index,'sel');
         }
-        sendProduct("/shoppingList", index);
+        sendProduct(index);
         })
     });
 
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if ((state == 1)&&(products[index-1].selected)){
                 changeProductList(index,'sel');
             }
-            sendProduct("/shoppingList", index);
+            sendProduct(index);
         })
     });
 
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
             liToDelete.classList.toggle('hidden');
             let index = buttonDelete.getAttribute('value');
             changeProductList(index,'del');
-            sendProduct("/shoppingList", index);
+            sendProduct(index);
         })
     });
 
@@ -165,9 +165,9 @@ function trim(text){
     return text;
 };
 
-function sendProduct(url, index){
-            fetch(url, {
-                    method: "post",
+function sendProduct(index){
+            fetch("/shoppingList", {
+                    method: "put",
                      headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
