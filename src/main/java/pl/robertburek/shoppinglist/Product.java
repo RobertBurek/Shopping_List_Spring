@@ -29,7 +29,8 @@ public class Product {
     }
 
     public enum Category {
-        NAPOJE, WARZYWA, OWOCE, NABIAŁ, PIECZYWO, PRZEKĄSKI
+        NAPOJE, WARZYWA, OWOCE, NABIAŁ, PIECZYWO, PRZEKĄSKI, SŁODYCZE, ART_PRZEMYSŁOWE, ART_MĄCZNE, WĘDLINY, MROŻONKI,
+        PRZYPRAWY, MIĘSO, SŁOIKI_PUSZKI,
     }
 
 }
