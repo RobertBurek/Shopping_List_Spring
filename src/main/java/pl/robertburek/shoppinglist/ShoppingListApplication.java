@@ -2,7 +2,6 @@ package pl.robertburek.shoppinglist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,7 @@ public class ShoppingListApplication {
 
 
     public static List<Product> products = new ArrayList<>();
+    public static List<String> categories = new ArrayList<>();
 
     static {
 //        products.add(new Product(1, "Mleko b/l", 0, false, Product.Category.NABIAŁ));
@@ -160,6 +160,21 @@ public class ShoppingListApplication {
         products.add(new Product(128,"Zmywacz do paznokci CIEN",1,true, Product.Category.ART_PRZEMYSŁOWE));
         products.add(new Product(129,"Zupa błyskaw.",1,false,Product.Category.PRZEKĄSKI));
         products.add(new Product(130,"Żurawina susz.",1,false,Product.Category.PRZEKĄSKI));
+
+        categories.add(Product.Category.NAPOJE.toString().toLowerCase());
+        categories.add(Product.Category.WARZYWA.toString().toLowerCase());
+        categories.add(Product.Category.OWOCE.toString().toLowerCase());
+        categories.add(Product.Category.NABIAŁ.toString().toLowerCase());
+        categories.add(Product.Category.PRZEKĄSKI.toString().toLowerCase());
+        categories.add(Product.Category.SŁODYCZE.toString().toLowerCase());
+        categories.add(Product.Category.ART_PRZEMYSŁOWE.toString().toLowerCase());
+        categories.add(Product.Category.ART_MĄCZNE.toString().toLowerCase());
+        categories.add(Product.Category.WĘDLINY.toString().toLowerCase());
+        categories.add(Product.Category.MROŻONKI.toString().toLowerCase());
+        categories.add(Product.Category.PRZYPRAWY.toString().toLowerCase());
+        categories.add(Product.Category.MIĘSO.toString().toLowerCase());
+        categories.add(Product.Category.SŁOIKI_PUSZKI.toString().toLowerCase());
+
     }
 
 

@@ -59,6 +59,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
+                        <li class="simple-product" style="margin-bottom: 0px;" th:each="categ: ${categories}" >
+                            <a href="#" th:text="${categ}">category</a>
+                        </li>
+
                         <!-- <li><a href="#">Art. mączne</a></li>   -->
                         <!-- przykładowa linia generowana przez js -->
                     </ul>
@@ -122,7 +126,7 @@
 						<button class="btn btn--swap btn-danger" id="cleanList" type="submit"> Wyczyść listę
 						<span>ZASTANÓW SIĘ</span></button>
 					</span>
-            <span class="group-btn">
+                    <span class="group-btn">
 						<button class="btn btn--swap btn-danger" id="cleanAll" type="submit">Usuń wszystko
 						<span>ZASTANÓW SIĘ</span></button>
 					</span>
@@ -237,7 +241,12 @@
 <script th:inline="javascript">
 
     let products = [[${products}]];
-    console.log(products);
+    // console.log(products);
+    console.log("Zrobiłem listę produktów.");
+
+    let categories = [[${categories}]];
+    // console.log(categories);
+    console.log("Zrobiłem listę kategorii.");
 
 </script>
 <script th:src="@{/js/functions.js}"></script>

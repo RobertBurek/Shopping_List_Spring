@@ -59,6 +59,9 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
+                        <li class="simple-product" style="margin-bottom: 0px;" th:each="categ: ${categories}" >
+                            <a href="#" th:text="${categ}">category</a>
+                        </li>
                         <!-- <li><a href="#">Art. mączne</a></li>   -->
                         <!-- przykładowa linia generowana przez js -->
                     </ul>
@@ -149,16 +152,25 @@
             <li th:each="prod: ${products}" class="simple-product">
 
                <div class="input-group" style="display:flex;width: 88%;">
-               	<input style="width: 300px;" type="text" class="form-control form-list" th:id="'name'+${prod.id}"
+<!--                   text-decoration: underline line-through overline;-->
+<!--               	<input style="width: 300px; background: url('../images/background7_1.png');"  class="form-control form-list" th:id="'name'+${prod.id}" type="text"-->
+               	<input style="width: 300px;"  class="form-control form-list" th:id="'name'+${prod.id}" type="text"
                        th:value="${prod.name}" disabled>
+<!--               	<input style="width: 30px; padding-left: 0px; padding-right: 0px; text-align: center; background: url('../images/background7_2.png');"-->
                	<input style="width: 30px; padding-left: 0px; padding-right: 0px; text-align: center;"
                        type="text" class="form-control form-list" th:id="'inputAmount'+${prod.id}"
                        th:value="${prod.quantity}" disabled>
-               	<input style="width: 50px; padding-left: 0px; padding-right: 20px;;" type="text"
+<!--               	<input style="width: 50px; padding-left: 0px; padding-right: 20px; background: url('../images/background7_3.png');" type="text"-->
+               	<input style="width: 50px; padding-left: 0px; padding-right: 20px;" type="text"
                        class="form-control form-list" value="szt." disabled>
+<!--               	<span class="input-group-btn">-->
                	<span class="input-group-btn">
-               		<button class="btn btn-danger delete-product-btn" th:value="${prod.id}">
-                        <i class="fa fa-times"></i></button>
+<!--               		<button class="btn btn-default select-product-btn" th:value="${prod.id}">-->
+               		<button class="btn select-product-btn" th:value="${prod.id}">
+<!--                    btn btn-danger delete-product-btn-->
+<!--                        btn btn-default select-product-btn btn-success-->
+                        <i class="fa fa-check"></i></button>
+
                	</span>
                </div>
             </li>
@@ -232,6 +244,10 @@
 
     var products = [[${products}]];
     console.log(products);
+
+    let categories = [[${categories}]];
+    // console.log(categories);
+    console.log("Zrobiłem listę kategorii.");
 
 </script>
 

@@ -16,6 +16,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static pl.robertburek.shoppinglist.ShoppingListApplication.products;
+import static pl.robertburek.shoppinglist.ShoppingListApplication.categories;
 
 
 /**
@@ -47,6 +48,7 @@ public class DesignShopListController {
             }
         }).collect(Collectors.toList());
         model.addAttribute("products", products);
+        model.addAttribute("categories", categories);
         model.addAttribute("shoppingList", new ShoppingList());
         model.addAttribute("product", new Product());
         log.info(model.toString());

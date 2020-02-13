@@ -39,6 +39,10 @@ function toIndex(index){
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    console.log(inputQuantityAll);
+    console.log(categories);
+    console.log(products);
+
     if(optionView) {
         settingStyle.style.display="flex";
     } else {
@@ -200,16 +204,7 @@ function Product(id,name,quantity,selected,category){
 
 function changeProductList(index, option){
 let oldProduct = products[index];
-//for(let i=0;i<products.length;i++){
-//if(products[i].id==index) {
-//oldProduct = products[i];
-//numberForList=i;
-//break;
-//}
-//};
-//console.log(numberForList+"/"+index);
 console.log(oldProduct);
-//     products[index-1];
         let inputSelected = document.querySelector('#inputAmount'+oldProduct.id);
         console.log(inputSelected);
     switch (option){

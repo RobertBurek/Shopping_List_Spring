@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static pl.robertburek.shoppinglist.ShoppingListApplication.categories;
 import static pl.robertburek.shoppinglist.ShoppingListApplication.products;
 
 
@@ -38,6 +39,7 @@ public class ShopListController {
             }
         }).collect(Collectors.toList());
         model.addAttribute("products", listSelectedProducts);
+        model.addAttribute("categories", categories);
         log.info("Wybrani : " + listSelectedProducts);
         return "shoppingList";
     }
